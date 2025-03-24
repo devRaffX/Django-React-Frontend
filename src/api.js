@@ -1,11 +1,10 @@
 import axios from "axios"
 import { ACCESS_TOKEN } from "./constants"
 
-const isDevelopment = import.meta.env.MODE === 'development'
-const myBaseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
+const apiUrl = "https://django-react-backend-nzrz.onrender.com"
 
 const api = axios.create({
-    baseURL: myBaseUrl
+    baseURL: import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : apiUrl,
 })
 
 api.interceptors.request.use(
