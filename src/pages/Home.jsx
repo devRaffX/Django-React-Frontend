@@ -34,6 +34,17 @@ function Home() {
       .catch((error) => alert(error));
   };
 
+  const editNote = (id, editTitle, editContent) => {
+    api
+      .put(`/api/notes/edit/${id}/`, { title: editTitle, content: editContent })
+      .then((res) => {
+        if (res.status === 200) alert("Note edited!");
+        else alert("Failed to edit note.");
+        getNotes();
+      })
+      .catch((error) => alert(error));
+  };
+
   const createNote = (e) => {
     e.preventDefault();
     api
@@ -51,7 +62,7 @@ function Home() {
       <div>
         <h2>Notes</h2>
         {notes.map((note) => (
-          <Note note={note} onDelete={deleteNote} key={note.id} />
+          <Note note={note} onDelete={deleteNote} onEdit={editNote} key={note.id} />
         ))}
       </div>
       <h2>Create a Note</h2>
